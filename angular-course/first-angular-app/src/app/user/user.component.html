@@ -2,11 +2,11 @@
   <button (click)="onSelectUser()">
     <!-- <img src="../../assets/users/{{ selectedUser.avatar }}" [alt]="selectedUser.name"/> -->
     <img 
-      [src]="imagePath()" 
-      [alt]="selectedUser().name"
+      [src]="imagePath" 
+      [alt]="name"
     /> <!-- Property binding -->
     <!-- binds the src/alt property of the underlying HTMLImageElement DOM object to the value stored in .avatar/.name -->
     <!-- It is considered a better practice to keep your template code, the dynamic template code, fairly simple and to outsource computations into a different place -->
-    <span>{{ selectedUser().name }}</span> <!-- String interpolation -->
+    <span>{{ name }}</span> <!-- String interpolation -->
   </button>
 </div>

@@ -1,4 +1,4 @@
-import { Component, computed, Input, input } from '@angular/core';
+import { Component, computed, EventEmitter, Input, input, output, Output } from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -12,22 +12,31 @@ import { Component, computed, Input, input } from '@angular/core';
 //   @Input({required: true}) avatar!: string;
 //   @Input({required: true}) name!: string;
 
+//   @Output() select = new EventEmitter<string>()
+
 //   get imagePath() {
 //     return '../../assets/users/' + this.avatar;
 //   }
   
-//   onSelectUser() { }
+//   onSelectUser() { 
+//    this.select.emit(this.id)
+//}
 // }
 
 //With signal
 export class UserComponent {
   //they are read-ony, Can't use .set
+  id = input.required<string>();
   avatar = input.required<string>();
   name = input.required<string>();
+
+  select = output<string>();
 
   imagePath = computed(() => {
     return '../../assets/users/' + this.avatar()
   });
   
-  onSelectUser() { }
+  onSelectUser() {
+    this.select.emit(this.id())
+  }
 }

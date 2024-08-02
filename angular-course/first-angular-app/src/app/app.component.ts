@@ -15,7 +15,7 @@ import { TasksComponent } from './tasks/tasks.component';
 
 export class AppComponent {
   users = DUMMY_USERS; //Expose import data in the template of this component
-  selectedUserId = 'u1' //Default value
+  selectedUserId?: string
   title = 'first-angular-app';
 
   get selectedUser() {

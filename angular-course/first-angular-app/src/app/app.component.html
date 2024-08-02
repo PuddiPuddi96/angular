@@ -14,6 +14,7 @@
 
   @if (selectedUser) {
     <app-tasks 
+      [userId]="selectedUser.id"
       [name]="selectedUser.name"
     />
   } @else {

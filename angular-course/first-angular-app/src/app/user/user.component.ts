@@ -29,6 +29,7 @@ import { type User } from './user.model';
 export class UserComponent {
   //they are read-ony, Can't use .set
   user = input.required<User>();
+  selected = input.required<boolean>();
 
   select = output<string>();
 

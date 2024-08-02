@@ -14,7 +14,14 @@ export class TasksComponent {
   userId = input.required<string>()
   name = input.required<string>()
 
+  tasks = DUMMY_TASKS;
+
   get selectedUserTasks() {
-    return DUMMY_TASKS.filter((task) => task.userId == this.userId())
+    return this.tasks.filter((task) => task.userId == this.userId())
+  }
+
+  onCompleteTask(id: string){
+    console.log(id)
+    this.tasks = this.tasks.filter((task) => task.id !== id)
   }
 }

@@ -21,5 +21,13 @@ export const DUMMY_TASKS = [
     summary:
       'Prepare and describe an issue template which will help with project management',
     dueDate: '2024-06-15',
+  },
+  {
+    id: 't4',
+    userId: 'u2',
+    title: 'Test',
+    summary:
+      'Prepare test suite',
+    dueDate: '2024-011-15',
   }
 ];

@@ -11,7 +11,6 @@ templateUrl: defines the markup, the content that should be displayed by that Co
 
 @Component({
   selector: 'app-header',
-  standalone: true,
   templateUrl: '../header/header.component.html',
   styleUrl: '../header/header.component.css'
 })

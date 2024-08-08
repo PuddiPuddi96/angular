@@ -13,10 +13,10 @@ export class UserInputComponent {
   //@Output() calculate = new EventEmitter<InvestmentInput>();
   calculate = output<InvestmentInput>();
 
-  enteredInitialInvestment = signal('1');
-  enteredAnnualInvestment = signal('2');
-  enteredExpectedReturn = signal('3');
-  enteredDuration = signal('4');
+  enteredInitialInvestment = signal('0');
+  enteredAnnualInvestment = signal('0');
+  enteredExpectedReturn = signal('5');
+  enteredDuration = signal('10');
 
   onSubmit() {
     this.calculate.emit({
@@ -25,6 +25,12 @@ export class UserInputComponent {
       expectedReturn: +this.enteredExpectedReturn(),
       annualInvestment: +this.enteredAnnualInvestment()
     });
+
+    //reset form
+    this.enteredInitialInvestment.set('0')
+    this.enteredAnnualInvestment.set('0')
+    this.enteredExpectedReturn.set('5')
+    this.enteredDuration.set('10')
   }
 
 }

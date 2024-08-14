@@ -1,4 +1,4 @@
-import { Component, input, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -19,8 +19,12 @@ export class ControlComponent {
   // }
   
   label = input.required<string>()
+  //reference to some element that's rendered to the page
+  //By injecting it into a component like this, Angular will give you access to the host element of that component
+  private element = inject(ElementRef)
 
   onClick() {
     console.log('Clicked')
+    console.log(this.element);
   }
 }

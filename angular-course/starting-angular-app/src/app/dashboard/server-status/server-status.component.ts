@@ -9,8 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServerStatusComponent implements OnInit {
   currentStatus: 'online' | 'offline' | 'unknown' = 'offline';
+  private interval?: ReturnType<typeof setInterval>
+
+  constructor() {}
 
   ngOnInit() {
+    console.log('ON INIT')
     setInterval(() => {
       const rnd = Math.random();
 
@@ -22,5 +26,9 @@ export class ServerStatusComponent implements OnInit {
         this.currentStatus = 'unknown'
       }
     }, 1000);
+  }
+
+  ngAfterViewInit() {
+    console.log('AFTER VIEW INIT')
   }
 }

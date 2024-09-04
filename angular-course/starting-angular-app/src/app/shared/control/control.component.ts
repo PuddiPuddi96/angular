@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { Component, contentChild, ContentChild, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -23,8 +23,15 @@ export class ControlComponent {
   //By injecting it into a component like this, Angular will give you access to the host element of that component
   private element = inject(ElementRef)
 
+  // @ContentChild('input') private control?: ElementRef<
+  // HTMLInputElement | HTMLTextAreaElement>
+
+  private control = 
+    contentChild.required<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');
+
   onClick() {
     console.log('Clicked')
     console.log(this.element);
+    console.log(this.control());
   }
 }

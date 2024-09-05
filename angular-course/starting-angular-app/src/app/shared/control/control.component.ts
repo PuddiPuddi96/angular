@@ -1,4 +1,4 @@
-import { Component, contentChild, ContentChild, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, afterRender, Component, contentChild, ContentChild, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -13,6 +13,15 @@ import { Component, contentChild, ContentChild, ElementRef, inject, input, ViewE
   }
 })
 export class ControlComponent {
+
+  constructor() {
+    afterRender(() => {
+      console.log('AFTER RENDER')
+    })
+    afterNextRender(() => {
+      console.log('AFTER NEXT RENDERE')
+    })
+  }
   //@HostBinding('class') className = 'control';
   // @HostListener('click') onClick() {
   //   console.log('Clicked')

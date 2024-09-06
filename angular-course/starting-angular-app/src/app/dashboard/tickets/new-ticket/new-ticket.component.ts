@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, viewChild, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, output, viewChild, ViewChild } from '@angular/core';
 import { ButtonComponent } from "../../../shared/button/button.component";
 import { ControlComponent } from "../../../shared/control/control.component";
 import { FormsModule } from '@angular/forms';
@@ -16,14 +16,15 @@ export class NewTicketComponent implements AfterViewInit{
   //Signal
   private form = viewChild.required<ElementRef<HTMLFormElement>>('form'); //since 17.3
 
+  add = output<{title: string, text: string}>();
+
   ngAfterViewInit(): void {
     console.log('AFTER VIEW INIT');
     console.log(this.form().nativeElement)
   }
 
   onSubmit(title: string, ticketText: string) {
-    console.log(title);
-    console.log(ticketText);
+    this.add.emit({title: title, text: ticketText});
 
     //this.form?.nativeElement.reset();
 

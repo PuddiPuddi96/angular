@@ -3,11 +3,13 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Place } from './place.model';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { ErrorService } from '../shared/error.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlacesService {
+  private readonly errorService = inject(ErrorService);
   private readonly httpClient = inject(HttpClient);
   private readonly userPlaces = signal<Place[]>([]);
 
@@ -42,6 +44,7 @@ export class PlacesService {
     ).pipe(
       catchError(error => {
         this.userPlaces.set(prevPlaces);
+        this.errorService.showError('Failed to store selected place.')
         return throwError(() => new Error('Failed to store selected place.'))
       })
     );

@@ -13,8 +13,8 @@ import { PlacesService } from '../places.service';
 })
 export class UserPlacesComponent implements OnInit {
 
-  private placesService = inject(PlacesService);
-  private destroyRef = inject(DestroyRef);
+  private readonly placesService = inject(PlacesService);
+  private readonly destroyRef = inject(DestroyRef);
 
   isFetching = signal(false);
   error = signal('');

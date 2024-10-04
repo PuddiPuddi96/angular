@@ -9,7 +9,7 @@ import { catchError, map, Observable, tap, throwError } from 'rxjs';
 })
 export class PlacesService {
   private readonly httpClient = inject(HttpClient);
-  private userPlaces = signal<Place[]>([]);
+  private readonly userPlaces = signal<Place[]>([]);
 
   loadedUserPlaces = this.userPlaces.asReadonly();
 
@@ -47,7 +47,9 @@ export class PlacesService {
     );
   }
 
-  removeUserPlace(place: Place) { }
+  removeUserPlace(place: Place) { 
+    //do something
+  }
 
   private fetchPlaces(url: string, errorMessage: string): Observable<Place[]> {
     return this.httpClient

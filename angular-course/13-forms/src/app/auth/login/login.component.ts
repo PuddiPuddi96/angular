@@ -63,7 +63,7 @@
 
 //*** REACTIVE FORM ***/
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -74,11 +74,34 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class LoginComponent {
   loginForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
+    email: new FormControl('', {
+      validators: [Validators.required, Validators.email],
+    }),
+    password: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(6)],
+    })
   });
 
+  get emailIsInvalid() {
+    return (
+      this.loginForm.controls.email.touched &&
+      this.loginForm.controls.email.dirty &&
+      this.loginForm.controls.email.invalid
+    );
+  }
+
+  get passwordIsInvalid() {
+    return (
+      this.loginForm.controls.password.touched &&
+      this.loginForm.controls.password.dirty &&
+      this.loginForm.controls.password.invalid
+    );
+  }
+
   onSubmit() {
+    //To add more control
+    //this.loginForm.controls.email.addValidators();
+
     console.log(this.loginForm);
 
     const enteredEmail = this.loginForm.value.email;

@@ -56,9 +56,17 @@
     <div class="control no-margin">
       <label for="password">Password</label>
       <!-- <input id="password" type="password" [formControl]="loginForm.controls.password" /> -->
-       <input id="password" type="password" formControlName="password" />
+      <input id="password" type="password" formControlName="password" />
     </div>
 
     <button class="button">Login</button>
   </div>
+
+  @if(emailIsInvalid) {
+  <p class="control-error">Please enter a valid email address.</p>
+  }
+
+  @if(passwordIsInvalid) {
+    <p class="control-error">Please enter a valid password (at least 6 characters long).</p>
+    }
 </form>

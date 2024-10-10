@@ -64,6 +64,7 @@
 //*** REACTIVE FORM ***/
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { of } from 'rxjs';
 
 function mustContainsQuestionMark(control: AbstractControl) {
   if(control.value.includes('?')) {
@@ -71,6 +72,15 @@ function mustContainsQuestionMark(control: AbstractControl) {
   }
 
   return { doesNotContainQuestionMark: true };
+}
+
+//Simulate http request to backend
+function emailIsUnique(control: AbstractControl) {
+  if(control.value !== 'test@example.com'){
+    return of(null);
+  }
+
+  return of({ notUnique: true });
 }
 
 @Component({
@@ -84,6 +94,7 @@ export class LoginComponent {
   loginForm = new FormGroup({
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
+      asyncValidators: [emailIsUnique],
     }),
     password: new FormControl('', {
       validators: [Validators.required, Validators.minLength(6), mustContainsQuestionMark],

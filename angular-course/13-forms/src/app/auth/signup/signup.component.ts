@@ -9,32 +9,41 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './signup.component.css',
 })
 export class SignupComponent {
-  form = new FormGroup({
+  mainForm = new FormGroup({
     email: new FormControl('', {
       validators: [Validators.required, Validators.email]
     }),
-    password: new FormControl('', {
-      validators: [Validators.required, Validators.min(6)]
+    
+    passwordsForm: new FormGroup({
+      password: new FormControl('', {
+        validators: [Validators.required, Validators.min(6)]
+      }),
+      confirmPassword: new FormControl('', {
+        validators: [Validators.required, Validators.min(6)]
+      }),
     }),
-    confirmPassword: new FormControl('', {
-      validators: [Validators.required, Validators.min(6)]
-    }),
+
     firstName: new FormControl('', {
       validators: [Validators.required]}),
-    lastName: new FormControl('', {validators: [Validators.required]
-    }),
-    street: new FormControl('', {
+    lastName: new FormControl('', {
       validators: [Validators.required]
     }),
-    number: new FormControl('', {
-      validators: [Validators.required]
+
+    addressForm: new FormGroup({
+      street: new FormControl('', {
+        validators: [Validators.required]
+      }),
+      number: new FormControl('', {
+        validators: [Validators.required]
+      }),
+      postalCode: new FormControl('', {
+        validators: [Validators.required]
+      }),
+      city: new FormControl('', {
+        validators: [Validators.required]
+      }),
     }),
-    postalCode: new FormControl('', {
-      validators: [Validators.required]
-    }),
-    city: new FormControl('', {
-      validators: [Validators.required]
-    }),
+
     role: new FormControl<'student' | 'teacher' | 'employee' | 'founder' | 'other'>('student', {
       validators: [Validators.required]
     }),
@@ -44,11 +53,11 @@ export class SignupComponent {
   });
 
   onSubmit() {
-    console.log(this.form);
+    console.log(this.mainForm);
   }
 
   onReset() {
-    this.form.reset();
+    this.mainForm.reset();
   }
 
 }

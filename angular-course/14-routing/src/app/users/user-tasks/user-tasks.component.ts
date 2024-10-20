@@ -18,11 +18,12 @@
 
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-user-tasks',
   standalone: true,
+  imports: [RouterOutlet],
   templateUrl: './user-tasks.component.html',
   styleUrl: './user-tasks.component.css',
 })

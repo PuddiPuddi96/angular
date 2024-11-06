@@ -41,4 +41,15 @@
   </p>
 </section>
 
-<app-offer-preview />
+<!-- Only loaded if it's scrolled into vieweport  -->
+@defer(on viewport) {
+  <app-offer-preview />
+} @placeholder {
+  <p class="fallback">We might have an offer...</p>
+}
+
+<!-- @defer(on interaction; prefetch on hover) {
+  <app-offer-preview />
+} @placeholder {
+  <p class="fallback">We might have an offer...</p>
+} -->

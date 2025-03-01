@@ -18,7 +18,7 @@ export class EmployeeComponent {
     this.dialog.open(AddEmployeeComponent, {
       width: '50%',
       exitAnimationDuration: '1000ms',
-      enterAnimationDuration: '1000ms'
-    })
+      enterAnimationDuration: '1000ms',
+    });
   }
 }

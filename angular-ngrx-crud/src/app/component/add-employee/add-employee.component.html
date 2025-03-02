@@ -18,7 +18,10 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Date of joining</mat-label>
-        <input matInput formControlName="doj" />
+        <input matInput [matDatepicker]="picker" formControlName="doj">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Role</mat-label>

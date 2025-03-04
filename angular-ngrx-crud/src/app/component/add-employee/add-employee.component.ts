@@ -25,7 +25,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatButtonModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './add-employee.component.html',

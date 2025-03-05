@@ -27,8 +27,14 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Role</mat-label>
+        <mat-label>Employee role</mat-label>
         <input matInput formControlName="role" />
+        <mat-select formControlName="role">
+          <mat-option value="">Please select role</mat-option>
+          <mat-option value="manager">Manager</mat-option>
+          <mat-option value="lead">Lead</mat-option>
+          <mat-option value="operator">Operator</mat-option>
+        </mat-select>
       </mat-form-field>
     </form>
   </mat-card-content>

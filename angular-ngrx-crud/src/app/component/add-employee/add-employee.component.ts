@@ -41,5 +41,9 @@ export class AddEmployeeComponent {
     salary: new FormControl(0, Validators.required),
   });
 
-  saveEmployee() {}
+  saveEmployee() {
+    if(this.employeeForm.valid){
+      console.log(this.employeeForm.value)
+    }
+  }
 }

@@ -41,7 +41,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.getAllEmployee();
   }
 
   ngOnDestroy(): void {
@@ -57,10 +57,35 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   }
 
   public addEmployee() {
-    this.dialog.open(AddEmployeeComponent, {
-      width: '50%',
-      exitAnimationDuration: '1000ms',
-      enterAnimationDuration: '1000ms',
-    });
+    this.openPopup(0);
+  }
+
+  public editEmployee(employeeId: number) {
+    this.openPopup(employeeId);
+  }
+
+  public deleteEmployee(employeeId: number) {
+    if (confirm('Are you sure?')) {
+      let sub = this.service.deleteEmployee(employeeId).subscribe((item) => {
+        this.getAllEmployee();
+      });
+      this.subscription.add(sub);
+    }
+  }
+
+  openPopup(employeeId: number) {
+    this.dialog
+      .open(AddEmployeeComponent, {
+        width: '50%',
+        exitAnimationDuration: '1000ms',
+        enterAnimationDuration: '1000ms',
+        data: {
+          code: employeeId,
+        },
+      })
+      .afterClosed()
+      .subscribe((o) => {
+        this.getAllEmployee();
+      });
   }
 }

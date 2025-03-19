@@ -8,6 +8,9 @@ import { Employee } from '../../model/employee';
 import { EmployeeService } from '../../service/employee.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { getEmployeeList } from '../../store/employee.selector';
+import { loadEmployee } from '../../store/employee.action';
 
 @Component({
   selector: 'app-employee',
@@ -35,9 +38,15 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   ];
   subscription = new Subscription();
 
+  // constructor(
+  //   private readonly dialog: MatDialog,
+  //   private readonly service: EmployeeService
+  // ) {}
+
   constructor(
     private readonly dialog: MatDialog,
-    private readonly service: EmployeeService
+    private readonly service: EmployeeService,
+    private readonly store: Store
   ) {}
 
   ngOnInit(): void {
@@ -48,12 +57,20 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  // public getAllEmployee() {
+  //   let subscribe = this.service.getAll().subscribe((item) => {
+  //     this.employeeList = item;
+  //     this.dataSource = new MatTableDataSource(this.employeeList);
+  //   });
+  //   this.subscription.add(subscribe);
+  // }
+
   public getAllEmployee() {
-    let subscribe = this.service.getAll().subscribe((item) => {
+    this.store.dispatch(loadEmployee());
+    this.store.select(getEmployeeList).subscribe((item) => {
       this.employeeList = item;
       this.dataSource = new MatTableDataSource(this.employeeList);
     });
-    this.subscription.add(subscribe);
   }
 
   public addEmployee() {

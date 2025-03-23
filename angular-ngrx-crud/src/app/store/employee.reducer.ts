@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { employeeState } from './employee.state';
-import { loadEmployeeFail, loadEmployeeSuc } from './employee.action';
+import { deleteEmployeeSuc, loadEmployeeFail, loadEmployeeSuc } from './employee.action';
 
 const _employeeReducer = createReducer(
   employeeState,
@@ -9,6 +9,10 @@ const _employeeReducer = createReducer(
   }),
   on(loadEmployeeFail, (state, action) => {
     return { ...state, list: [], errorMessage: action.errMsg };
+  }),
+  on(deleteEmployeeSuc, (state, action) => {
+    const _newData = state.list.filter(o => o.id != action.employeeId)
+    return { ...state, list: _newData, errorMessage: '' };
   })
 );
 

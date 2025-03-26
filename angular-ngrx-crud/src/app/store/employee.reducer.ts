@@ -1,6 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import { employeeState } from './employee.state';
-import { deleteEmployeeSuc, loadEmployeeFail, loadEmployeeSuc } from './employee.action';
+import {
+  addEmployeeSuc,
+  deleteEmployeeSuc,
+  loadEmployeeFail,
+  loadEmployeeSuc,
+  updateEmployeeSuc,
+} from './employee.action';
 
 const _employeeReducer = createReducer(
   employeeState,
@@ -11,7 +17,17 @@ const _employeeReducer = createReducer(
     return { ...state, list: [], errorMessage: action.errMsg };
   }),
   on(deleteEmployeeSuc, (state, action) => {
-    const _newData = state.list.filter(o => o.id != action.employeeId)
+    const _newData = state.list.filter((o) => o.id != action.employeeId);
+    return { ...state, list: _newData, errorMessage: '' };
+  }),
+  on(addEmployeeSuc, (state, action) => {
+    const _newData = { ...action.data };
+    return { ...state, list: [...state.list, _newData], errorMessage: '' };
+  }),
+  on(updateEmployeeSuc, (state, action) => {
+    const _newData = state.list.map((o) => {
+      return o.id === action.data.id ? action.data : o;
+    });
     return { ...state, list: _newData, errorMessage: '' };
   })
 );

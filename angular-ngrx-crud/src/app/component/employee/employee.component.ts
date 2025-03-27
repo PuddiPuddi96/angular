@@ -5,12 +5,11 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { Employee } from '../../model/employee';
-import { EmployeeService } from '../../service/employee.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { getEmployeeList } from '../../store/employee.selector';
-import { loadEmployee } from '../../store/employee.action';
+import { deleteEmployee, loadEmployee } from '../../store/employee.action';
 
 @Component({
   selector: 'app-employee',
@@ -45,7 +44,6 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly dialog: MatDialog,
-    private readonly service: EmployeeService,
     private readonly store: Store
   ) {}
 
@@ -81,12 +79,18 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     this.openPopup(employeeId);
   }
 
+  // public deleteEmployee(employeeId: number) {
+  //   if (confirm('Are you sure?')) {
+  //     let sub = this.service.deleteEmployee(employeeId).subscribe((item) => {
+  //       this.getAllEmployee();
+  //     });
+  //     this.subscription.add(sub);
+  //   }
+  // }
+
   public deleteEmployee(employeeId: number) {
     if (confirm('Are you sure?')) {
-      let sub = this.service.deleteEmployee(employeeId).subscribe((item) => {
-        this.getAllEmployee();
-      });
-      this.subscription.add(sub);
+      this.store.dispatch(deleteEmployee({ employeeId: employeeId }));
     }
   }
 

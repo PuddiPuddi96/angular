@@ -3,6 +3,7 @@ import { employeeState } from './employee.state';
 import {
   addEmployeeSuc,
   deleteEmployeeSuc,
+  getEmployee,
   loadEmployeeFail,
   loadEmployeeSuc,
   updateEmployeeSuc,
@@ -29,6 +30,13 @@ const _employeeReducer = createReducer(
       return o.id === action.data.id ? action.data : o;
     });
     return { ...state, list: _newData, errorMessage: '' };
+  }),
+  on(getEmployee, (state, action) => {
+    let _newData = state.list.find((o) => o.id === action.employeeId);
+    if (_newData == null) {
+      _newData = state.empObj;
+    }
+    return { ...state, empObj: _newData };
   })
 );
 

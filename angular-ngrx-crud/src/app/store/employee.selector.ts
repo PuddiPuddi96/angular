@@ -6,3 +6,7 @@ const getEmployeeState = createFeatureSelector<EmployeeModel>('emp');
 export const getEmployeeList = createSelector(getEmployeeState, (state) => {
   return state.list;
 });
+
+export const getEmployeeSelector = createSelector(getEmployeeState, (state) => {
+  return state.empObj;
+});

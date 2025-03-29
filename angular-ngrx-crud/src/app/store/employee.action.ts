@@ -18,6 +18,11 @@ export const ADD_EMPLOYEE_SUCCESS = '[employee] add suc';
 export const UPDATE_EMPLOYEE = '[employee] update';
 export const UPDATE_EMPLOYEE_SUCCESS = '[employee] update suc';
 
+//GET
+export const GET_EMPLOYEE = '[employee] get employee';
+
+//******ACTIONS******//
+
 //LOAD
 export const loadEmployee = createAction(LOAD_EMPLOYEE);
 export const loadEmployeeSuc = createAction(
@@ -57,6 +62,12 @@ export const updateEmployee = createAction(
 export const updateEmployeeSuc = createAction(
   UPDATE_EMPLOYEE_SUCCESS,
   props<{ data: Employee }>()
+);
+
+//GET
+export const getEmployee = createAction(
+  GET_EMPLOYEE,
+  props<{ employeeId: number }>()
 );
 
 //Empty

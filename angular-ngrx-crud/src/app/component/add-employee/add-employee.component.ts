@@ -18,7 +18,12 @@ import { EmployeeService } from '../../service/employee.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
-import { addEmployee, updateEmployee } from '../../store/employee.action';
+import {
+  addEmployee,
+  getEmployee,
+  updateEmployee,
+} from '../../store/employee.action';
+import { getEmployeeSelector } from '../../store/employee.selector';
 
 @Component({
   selector: 'app-add-employee',
@@ -60,6 +65,19 @@ export class AddEmployeeComponent implements OnInit {
     if (this.dialogdata.code > 0) {
       this.title = 'Edit Employee';
       this.isEdit = true;
+      this.store.dispatch(getEmployee({ employeeId: this.dialogdata.code }));
+      this.store.select(getEmployeeSelector).subscribe((item) => {
+        let _data = item;
+        if (_data != null) {
+          this.employeeForm.setValue({
+            id: _data.id,
+            name: _data.name,
+            doj: _data.doj,
+            role: _data.role,
+            salary: _data.salary,
+          });
+        }
+      });
       // this.service.getEmployeeById(this.dialogdata.code).subscribe((item) => {
       //   let _data = item;
       //   if (_data != null) {
@@ -98,12 +116,11 @@ export class AddEmployeeComponent implements OnInit {
       //   });
       if (!this.isEdit) {
         this.store.dispatch(addEmployee({ data: _data }));
-      }
-      else {
+      } else {
         // this.service.createEmployee(_data).subscribe((item) => {
         //   this.toastr.success('Saved successfully', 'Created');
         // });
-        this.store.dispatch(updateEmployee({data:_data}))
+        this.store.dispatch(updateEmployee({ data: _data }));
       }
       this.closePopup();
     }
